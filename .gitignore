@@ -1,0 +1,11 @@
+# Node
+node_modules/
+package-lock.json
+
+# Build output
+dist/
+output.css
+
+# Environment
+.env
+.env.local
