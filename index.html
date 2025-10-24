@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Website</title>
+    <link href="./src/output.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div id="navbar"></div>
+
+    <main>
+      <section id="profile" class="border-b">
+        <div class="container h-screen pt-16 relative">
+          <div class="p-10">
+            <h1 class="text-3xl">Hi Almas, Welcome To Website</h1>
+            <p class="text-xs">Ini adalah website latihan pertama</p>
+          </div>
+
+          <p class="absolute inset-0 flex justify-center items-center text-xs">
+            1366x578
+          </p>
+        </div>
+      </section>
+
+      <section id="portofolio" class="border-b">
+        <div class="container">
+          <div class="p-10">
+            <h2 class="text-2xl font-bold">Our Headquarter</h2>
+            <div class="p-8 flex items-center gap-20">
+              <div class="flex flex-col items-center gap-4">
+                <div class="w-40 h-40 rounded-full border"></div>
+                <p>Jakarta</p>
+              </div>
+              <div class="flex flex-col items-center gap-4">
+                <div class="w-40 h-40 rounded-full border"></div>
+                <p>Bandung</p>
+              </div>
+              <div class="flex flex-col items-center gap-4">
+                <div class="w-40 h-40 rounded-full border"></div>
+                <p>Surabaya</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="message" class="container">
+        <div class="p-10">
+          <h2 class="text-2xl font-bold">Message Us</h2>
+          <div class="mt-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <form id="messageForm" class="bg-white p-6 rounded-lg space-y-4">
+                <div class="flex items-center gap-2">
+                  <label for="nama" class="w-24 text-sm font-medium"
+                    >Nama</label
+                  >
+                  :
+                  <input
+                    type="text"
+                    id="nama"
+                    name="nama"
+                    class="flex-1 border border-gray-300 rounded px-2 py-1"
+                    placeholder="Nama"
+                    required
+                  />
+                </div>
+
+                <div class="flex items-center gap-2">
+                  <label for="tglLahir" class="w-24 text-sm font-medium"
+                    >Tanggal Lahir</label
+                  >
+                  :<input
+                    type="date"
+                    id="tglLahir"
+                    name="tglLahir"
+                    class="flex-1 border border-gray-300 rounded px-2 py-1"
+                    required
+                  />
+                </div>
+
+                <div class="flex items-center gap-2">
+                  <span class="w-24 text-sm font-medium">Jenis Kelamin</span>
+                  <span class="text-sm">:</span>
+
+                  <label class="flex items-center gap-1 text-sm">
+                    <input
+                      type="radio"
+                      name="gender"
+                      value="Laki-Laki"
+                      required
+                    />
+                    Laki-Laki
+                  </label>
+
+                  <label class="flex items-center gap-1 text-sm">
+                    <input type="radio" name="gender" value="Perempuan" />
+                    Perempuan
+                  </label>
+                </div>
+
+                <div class="flex items-start gap-2">
+                  <label for="pesan" class="w-24 text-sm font-medium"
+                    >Pesan</label
+                  >
+                  :<textarea
+                    id="pesan"
+                    name="pesan"
+                    rows="3"
+                    class="flex-1 border border-gray-300 rounded px-2 py-1"
+                    placeholder="Pesan"
+                    required
+                  ></textarea>
+                </div>
+
+                <button
+                  type="submit"
+                  class="w-full bg-slate-300 hover:bg-slate-400 border py-2 rounded-md font-medium"
+                >
+                  Submit
+                </button>
+              </form>
+
+              <div
+                id="outputBox"
+                class="bg-white px-6 pt-16 border text-sm text-gray-700"
+              >
+                <p class="mb-8">
+                  <strong>Current time :</strong> <span id="currentTime"></span>
+                </p>
+                <p><strong>Nama :</strong> <span id="outNama">-</span></p>
+                <p>
+                  <strong>Tanggal Lahir :</strong>
+                  <span id="outTanggal">-</span>
+                </p>
+                <p>
+                  <strong>Jenis Kelamin :</strong> <span id="outGender">-</span>
+                </p>
+                <p><strong>Pesan :</strong> <span id="outPesan">-</span></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <script>
+          const form = document.getElementById("messageForm");
+          const timeSpan = document.getElementById("currentTime");
+
+          function updateTime() {
+            const now = new Date();
+            const formattedTime = now.toString().replace(/\s*\(.*\)/, "");
+            timeSpan.textContent = formattedTime;
+          }
+
+          updateTime();
+          setInterval(updateTime, 1000);
+
+          form.addEventListener("submit", (e) => {
+            e.preventDefault();
+
+            document.getElementById("outNama").textContent = form.nama.value;
+            const tgl = form.tglLahir.value;
+            if (tgl) {
+              const [year, month, day] = tgl.split("-");
+              document.getElementById(
+                "outTanggal"
+              ).textContent = `${day}/${month}/${year}`;
+            }
+            document.getElementById("outGender").textContent =
+              form.gender.value || "-";
+            document.getElementById("outPesan").textContent = form.pesan.value;
+          });
+        </script>
+      </section>
+    </main>
+
+    <div id="footer"></div>
+
+    <script src="./src/layout.js"></script>
+  </body>
+</html>
